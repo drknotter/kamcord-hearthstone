@@ -1,4 +1,4 @@
-kamcord-ping-pong
+kamcord-hearthstone
 =================
 
-The Kamcord Ping-Pong Elo Ranking System
+The Kamcord Hearthstone Elo Ranking System
