@@ -258,7 +258,39 @@ function acceptPendingMatch(key, match)
                 else
                 {
                     console.log("Login succeeded with authData: ", authData);
+<<<<<<< HEAD
                     var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone");
+=======
+                    var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong");
+                    pingpongRef.once('value', function(snapshot) {
+                        var players = Elo.readPlayers(snapshot.val());
+                        var playerNames = [];
+                        for( var i=0; i<players.length; i++ )
+                        {
+                            playerNames.push(players[i]['name']);
+                        }
+                        var matchPlayerNames = [
+                            match['team1'].split('&')[0], 
+                            match['team1'].split('&')[1],
+                            match['team2'].split('&')[0], 
+                            match['team2'].split('&')[1]];
+                        for( var i=0; i<matchPlayerNames.length; i++ )
+                        {
+                            if( playerNames.indexOf(matchPlayerNames[i]) == -1 )
+                            {
+                                pingpongRef.child("players").push(
+                                    {'name':matchPlayerNames[i], 'rank':1500, 'doubles-rank':1500},
+                                    function(error)
+                                    {
+                                        if( error )
+                                        {
+                                            console.log("push new player failed with error: ", error);
+                                        }
+                                    });
+                            }
+                        }
+                    });
+>>>>>>> 34c44f3c8131cadd37f9cf5a9b7db7a3ece06628
                     pingpongRef.child("doubles-matches").push(match, function(error)
                     {
                         if( error )
