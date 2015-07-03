@@ -3,8 +3,8 @@ var max_sets = 3;
 
 $(document).ready(function()
 {
-    new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/doubles-matches/").on("value", handleMatches);
-    new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/doubles-pending/").on("value", handlePending);
+    new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/doubles-matches/").on("value", handleMatches);
+    new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/doubles-pending/").on("value", handlePending);
     initClickHandlers();
 });
 
@@ -231,7 +231,7 @@ function submitNewMatch()
         match['sets'].push("{0}-{1}".format(team1Score.val(), team2Score.val()));
     }
     console.log(match);
-    var matchRef = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/doubles-pending/").push(match);
+    var matchRef = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/doubles-pending/").push(match);
     matchRef.update({'timestamp': Firebase.ServerValue.TIMESTAMP})
     $("#new_match_background").fadeOut(200);
 }
@@ -246,7 +246,7 @@ function acceptPendingMatch(key, match)
 
     $("#accept").on("click", function()
     {
-        var ref = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/");
+        var ref = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/");
         var email = $("#username_input").val();
         var password = $("#password_input").val();
         ref.authWithPassword({"email":email, "password": password}, function(error, authData)
@@ -258,7 +258,7 @@ function acceptPendingMatch(key, match)
                 else
                 {
                     console.log("Login succeeded with authData: ", authData);
-                    var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong");
+                    var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone");
                     pingpongRef.child("doubles-matches").push(match, function(error)
                     {
                         if( error )
@@ -277,7 +277,7 @@ function acceptPendingMatch(key, match)
 
     $("#reject").on("click", function()
     {
-        new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/doubles-pending").child(key).remove();
+        new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/doubles-pending").child(key).remove();
         $("#auth_background").fadeOut(200);
     });
 }

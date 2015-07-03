@@ -2,7 +2,7 @@ var show_inactive = false;
 
 $(document).ready(function()
 {
-    var pingPongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong/");
+    var pingPongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone/");
     pingPongRef.on("value",handleRankings);
 
     initClickHandlers();
