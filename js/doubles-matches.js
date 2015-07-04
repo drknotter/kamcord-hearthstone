@@ -258,10 +258,7 @@ function acceptPendingMatch(key, match)
                 else
                 {
                     console.log("Login succeeded with authData: ", authData);
-<<<<<<< HEAD
                     var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/hearthstone");
-=======
-                    var pingpongRef = new Firebase("https://crackling-fire-6808.firebaseio.com/ping-pong");
                     pingpongRef.once('value', function(snapshot) {
                         var players = Elo.readPlayers(snapshot.val());
                         var playerNames = [];
@@ -290,7 +287,6 @@ function acceptPendingMatch(key, match)
                             }
                         }
                     });
->>>>>>> 34c44f3c8131cadd37f9cf5a9b7db7a3ece06628
                     pingpongRef.child("doubles-matches").push(match, function(error)
                     {
                         if( error )
